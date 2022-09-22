@@ -13,7 +13,7 @@ spec:
     spec:
       containers:
       - name: udagram-frontend
-        image: callspadeoz123/udagram-frontend:v1
+        image: callspadeoz123/udagram-frontend:v2
         resources:
           limits:
             memory: "1500Mi"
