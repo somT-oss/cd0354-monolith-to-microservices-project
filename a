@@ -1,0 +1,199 @@
+UPDATE-KUBECONFIG()                                        UPDATE-KUBECONFIG()
+
+
+
+NNAAMMEE
+       update-kubeconfig -
+
+DDEESSCCRRIIPPTTIIOONN
+       Configures kubectl so that you can connect to an Amazon EKS cluster.
+
+       NNoottee::  To  use  the  resulting configuration, you must have kubectl in-
+              stalled and in your PATH environment variable.
+
+       This command constructs a configuration with  prepopulated  server  and
+       certificate  authority  data  values  for a specified cluster.  You can
+       specify an IAM role ARN with the --role-arn option to use for authenti-
+       cation  when  you issue kubectl commands.  Otherwise, the IAM entity in
+       your default AWS CLI or SDK credential chain is  used.   You  can  view
+       your   default  AWS  CLI  or  SDK  identity  by  running  the  aawwss  ssttss
+       ggeett--ccaalllleerr--iiddeennttiittyy command.
+
+       The resulting kubeconfig is created as a new file or merged with an ex-
+       isting kubeconfig file using the following logic:
+
+       +o If  you specify a path with the --kubeconfig option, then the result-
+         ing configuration file is created there or merged  with  an  existing
+         kubeconfig at that location.
+
+       +o Or, if you have the KUBECONFIG environment variable set, then the re-
+         sulting configuration file is created at  the  first  entry  in  that
+         variable or merged with an existing kubeconfig at that location.
+
+       +o Otherwise, by default, the resulting configuration file is created at
+         the default kubeconfig path (.kube/config) in your home directory  or
+         merged with an existing kubeconfig at that location.
+
+       +o If  a previous cluster configuration exists for an Amazon EKS cluster
+         with the same name at the specified path, the existing  configuration
+         is overwritten with the new configuration.
+
+       +o When  update-kubeconfig  writes a configuration to a kubeconfig file,
+         the current-context of the kubeconfig file is set to that  configura-
+         tion.
+
+       You  can  use the --dry-run option to print the resulting configuration
+       to stdout instead of writing it to the specified location.
+
+SSYYNNOOPPSSIISS
+            update-kubeconfig
+          --name <value>
+          [--kubeconfig <value>]
+          [--role-arn <value>]
+          [--dry-run]
+          [--verbose]
+          [--alias <value>]
+          [--debug]
+          [--endpoint-url <value>]
+          [--no-verify-ssl]
+          [--no-paginate]
+          [--output <value>]
+          [--query <value>]
+          [--profile <value>]
+          [--region <value>]
+          [--version <value>]
+          [--color <value>]
+          [--no-sign-request]
+          [--ca-bundle <value>]
+          [--cli-read-timeout <value>]
+          [--cli-connect-timeout <value>]
+
+OOPPTTIIOONNSS
+       ----nnaammee (string) The name of the cluster for which to create a  kubecon-
+       fig entry. This cluster must exist in your account and in the specified
+       or configured default Region for your AWS CLI installation.
+
+       ----kkuubbeeccoonnffiigg (string) Optionally specify a kubeconfig  file  to  append
+       with  your  configuration.  By default, the configuration is written to
+       the first file path in the KUBECONFIG environment variable  (if  it  is
+       set)  or the default kubeconfig path (.kube/config) in your home direc-
+       tory.
+
+       ----rroollee--aarrnn (string) To assume a role for cluster authentication,  spec-
+       ify  an  IAM  role  ARN with this option. For example, if you created a
+       cluster while assuming an IAM role, then you must also assume that role
+       to connect to the cluster the first time.
+
+       ----ddrryy--rruunn  (boolean)  Print  the merged kubeconfig to stdout instead of
+       writing it to the specified file.
+
+       ----vveerrbboossee (boolean) Print more detailed  output  when  writing  to  the
+       kubeconfig file, including the appended entries.
+
+       ----aalliiaass  (string) Alias for the cluster context name. Defaults to match
+       cluster ARN.
+
+GGLLOOBBAALL OOPPTTIIOONNSS
+       ----ddeebbuugg (boolean)
+
+       Turn on debug logging.
+
+       ----eennddppooiinntt--uurrll (string)
+
+       Override command's default URL with the given URL.
+
+       ----nnoo--vveerriiffyy--ssssll (boolean)
+
+       By default, the AWS CLI uses SSL when communicating with AWS  services.
+       For each SSL connection, the AWS CLI will verify SSL certificates. This
+       option overrides the default behavior of verifying SSL certificates.
+
+       ----nnoo--ppaaggiinnaattee (boolean)
+
+       Disable automatic pagination.
+
+       ----oouuttppuutt (string)
+
+       The formatting style for command output.
+
+       +o json
+
+       +o text
+
+       +o table
+
+       ----qquueerryy (string)
+
+       A JMESPath query to use in filtering the response data.
+
+       ----pprrooffiillee (string)
+
+       Use a specific profile from your credential file.
+
+       ----rreeggiioonn (string)
+
+       The region to use. Overrides config/env settings.
+
+       ----vveerrssiioonn (string)
+
+       Display the version of this tool.
+
+       ----ccoolloorr (string)
+
+       Turn on/off color output.
+
+       +o on
+
+       +o off
+
+       +o auto
+
+       ----nnoo--ssiiggnn--rreeqquueesstt (boolean)
+
+       Do not sign requests. Credentials will not be loaded if  this  argument
+       is provided.
+
+       ----ccaa--bbuunnddllee (string)
+
+       The CA certificate bundle to use when verifying SSL certificates. Over-
+       rides config/env settings.
+
+       ----ccllii--rreeaadd--ttiimmeeoouutt (int)
+
+       The maximum socket read time in seconds. If the value is set to 0,  the
+       socket  read  will be blocking and not timeout. The default value is 60
+       seconds.
+
+       ----ccllii--ccoonnnneecctt--ttiimmeeoouutt (int)
+
+       The maximum socket connect time in seconds. If the value is set  to  0,
+       the  socket connect will be blocking and not timeout. The default value
+       is 60 seconds.
+
+EEXXAAMMPPLLEESS
+       NNOOTTEE::
+          To use the following examples, you must have the AWS  CLI  installed
+          and  configured.  See  the _G_e_t_t_i_n_g _s_t_a_r_t_e_d _g_u_i_d_e in the _A_W_S _C_L_I _U_s_e_r
+          _G_u_i_d_e for more information.
+
+          Unless otherwise  stated,  all  examples  have  unix-like  quotation
+          rules.  These  examples  will  need to be adapted to your terminal's
+          quoting rules. See _U_s_i_n_g _q_u_o_t_a_t_i_o_n _m_a_r_k_s _w_i_t_h _s_t_r_i_n_g_s in the _A_W_S _C_L_I
+          _U_s_e_r _G_u_i_d_e .
+
+       TToo uuppddaattee aa kkuubbeeccoonnffiigg ffoorr yyoouurr cclluusstteerr
+
+       This  example  command  updates the default kubeconfig file to use your
+       cluster as the current context.
+
+       Command:
+
+          aws eks update-kubeconfig --name example
+
+       Output:
+
+          Added new context arn:aws:eks:us-west-2:012345678910:cluster/example to /Users/ericn/.kube/config
+
+
+
+                                                           UPDATE-KUBECONFIG()

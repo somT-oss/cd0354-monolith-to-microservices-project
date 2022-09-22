@@ -1,0 +1,22 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: reverseproxy-deployment
+spec:
+  selector:
+    matchLabels:
+      app: reverseproxy-deployment
+  template:
+    metadata:
+      labels:
+        app: reverseproxy-deployment
+    spec:
+      containers:
+      - name: reverseproxy-deployment
+        image: callspadeoz123/reverseproxy:v2
+        resources:
+          limits:
+            memory: "1200Mi"
+            cpu: "500m"
+        ports:
+        - containerPort: 80
